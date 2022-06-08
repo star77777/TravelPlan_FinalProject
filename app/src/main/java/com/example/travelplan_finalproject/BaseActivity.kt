@@ -13,6 +13,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var retrofit : Retrofit
     lateinit var apiList:APIList
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this

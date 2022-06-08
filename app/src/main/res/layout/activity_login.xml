@@ -11,8 +11,8 @@
         tools:context=".ui.main.LoginActivity">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="180dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/tourist_travel_icon"/>
 
@@ -50,6 +50,11 @@
                 android:layout_height="wrap_content"
                 android:hint="비밀번호 입력"
                 android:inputType="textPassword"/>
+            <CheckBox
+                android:id="@+id/autoLoginCb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="자동로그인"/>
 
             <Button
                 android:id="@+id/loginBtn"
@@ -63,7 +68,6 @@
                 android:id="@+id/signUpBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:text="회원가입"/>
         </LinearLayout>
 

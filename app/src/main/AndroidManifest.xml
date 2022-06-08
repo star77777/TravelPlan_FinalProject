@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelPlan_FinalProject">
         <activity
+            android:name=".dialog.CustomAlertDialog"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.MovementFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.CalendarListFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.MyAppointmentsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.SettingsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.InvitedAppointmentsFragment"
+            android:exported="false" />
+        <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
         <activity

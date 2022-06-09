@@ -2,13 +2,21 @@ package com.example.travelplan_finalproject.api
 
 
 import com.example.travelplan_finalproject.models.BasicResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface APIList {
     @GET("/user")
-    fun getRequestMyInfo(@Header("X-Http-Token") token : String) : Call<BasicResponse>
+    fun getRequestMyInfo() : Call<BasicResponse>
 
+
+    @FormUrlEncoded
+    @PATCH("/user")
+    fun patchRequestEditUserInfo(
+        @Field("field") field : String,
+        @Field("value") value: String,
+    ) : Call<BasicResponse>
 
     @FormUrlEncoded
     @POST("/user")
@@ -30,4 +38,8 @@ interface APIList {
         @Query("type") type : String,
         @Query("value") value : String,
     ) : Call<BasicResponse>
+
+    @Multipart
+    @PUT("/user/image")
+    fun putRequestUserImage(@Part profileImg : MultipartBody.Part) : Call<BasicResponse>
 }

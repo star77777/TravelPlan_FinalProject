@@ -2,10 +2,12 @@ package com.example.travelplan_finalproject.api
 
 import android.content.Context
 import com.example.travelplan_finalproject.utils.ContextUtil
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class ServerApi {
     companion object {
@@ -29,8 +31,12 @@ class ServerApi {
                 }
             }
 
-            //                retrofit : OkHttp의 확장판 => retrofit도 OkHttpClient 형태의 클라이언트 활용
-//                클라이언트에게 우리가 만든 인터셉터를 달아주자( 클라이언트 커스터 마이징 )
+
+                val gson = GsonBuilder().setDateFormat("yyyy-MM-dd")
+
+                    //.registerTypeAdapter(Date::class.java, DateDeserializer())
+                    .create()
+
             val myClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
             retrofit = Retrofit.Builder()

@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_calendar_list_fragment.xml" value="0.1037037037037037" />
+        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_calendar_list_fragment.xml" value="0.1" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_custom_alert_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_edit_calendar_list.xml" value="0.264" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_invited_appointments_fragment.xml" value="0.1" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -12,6 +13,9 @@
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_settings_fragment.xml" value="0.1" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_sign_up.xml" value="0.1259259259259259" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_splash.xml" value="0.23020833333333332" />
+        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/activity_today_add_fragment.xml" value="0.2078125" />
+        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/list_item_travel_list.xml" value="0.10909090909090909" />
+        <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/layout/list_item_travel_plans.xml" value="0.1" />
         <entry key="..\:/Users/Administrator.DESKTOP-SD0JJ92/AndroidStudioProjects/TravelPlan_FinalProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>

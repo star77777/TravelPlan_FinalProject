@@ -34,7 +34,6 @@ class ServerApi {
 
                 val gson = GsonBuilder().setDateFormat("yyyy-MM-dd")
 
-                    //.registerTypeAdapter(Date::class.java, DateDeserializer())
                     .create()
 
             val myClient = OkHttpClient.Builder().addInterceptor(interceptor).build()

@@ -7,23 +7,20 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface APIList {
-
-
-
+    @GET("/appointment")
+    fun getRequestdataList() : Call<BasicResponse>
 
     @FormUrlEncoded
-    @POST("/appointment")
-    fun postRequestAddAppointment(
+    @POST("/travelList")
+    fun postRequestdataList(
         @Field("title") title: String,
         @Field("datetime") datetime: String,
-        @Field("start_place") startPlace: String,
-        @Field("start_latitude") startLatitude: Double,
-        @Field("start_longitude") startLongitude: Double,
+        @Field("start_longitude") startLongitude: String,
         @Field("place") place: String,
-        @Field("latitude") latitude: Double,
-        @Field("longitude") longitude: Double,
+        @Field("latitude") latitude: String,
 
-    ): Call<BasicResponse>
+
+        ): Call<BasicResponse>
 
     @GET("/user")
     fun getRequestMyInfo() : Call<BasicResponse>
@@ -59,4 +56,7 @@ interface APIList {
     @Multipart
     @PUT("/user/image")
     fun putRequestUserImage(@Part profileImg : MultipartBody.Part) : Call<BasicResponse>
-}
+
+
+    }
+

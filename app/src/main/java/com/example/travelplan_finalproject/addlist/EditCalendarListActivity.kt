@@ -12,10 +12,12 @@ import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
 import com.example.travelplan_finalproject.databinding.ActivityEditCalendarListBinding
 import com.example.travelplan_finalproject.models.BasicResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class EditCalendarListActivity : BaseActivity() {
@@ -118,8 +120,8 @@ class EditCalendarListActivity : BaseActivity() {
 //            서버에서 요구한 약속일시 양식대로 변환하여 전달
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             val sda = SimpleDateFormat("yyyy. MM. dd")
-            val latitude = ""
-            val longitude = ""
+            val latitude = 0.0
+            val longitude = 0.0
             val inputPlaceName = ""
 
 
@@ -127,18 +129,25 @@ class EditCalendarListActivity : BaseActivity() {
                 inputTitle,
                 sdf.format(mSelectedDateTime.time),
               //  sda.format(mSelectedDateTime2.time),
+                inputPlaceName,
                 latitude,
                 longitude,
-                inputPlaceName,
             ).enqueue(object : Callback<BasicResponse> {
                 override fun onResponse(
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
                 ) {
                     if (response.isSuccessful) {
+                        Log.d("", response.body()!!.toString())
                         Toast.makeText(mContext, "일정이 등록되었습니다.", Toast.LENGTH_SHORT).show()
                         Log.d("현재올린 일정정보", response.body()!!.data.calendarlist.toString())
                         finish()
+                    }
+                    else {
+                        val errorBodyStr = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(errorBodyStr)
+                        val message = jsonObj.getString("message")
+                        Log.d("서버 문제", message)
                     }
                 }
 

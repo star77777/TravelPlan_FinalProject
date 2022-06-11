@@ -15,11 +15,9 @@ interface APIList {
     fun postRequestdataList(
         @Field("title") title: String,
         @Field("datetime") datetime: String,
-        @Field("start_longitude") startLongitude: String,
         @Field("place") place: String,
-        @Field("latitude") latitude: String,
-
-
+        @Field("latitude") latitude: Double,
+        @Field("longitude") longitude: Double,
         ): Call<BasicResponse>
 
     @GET("/user")

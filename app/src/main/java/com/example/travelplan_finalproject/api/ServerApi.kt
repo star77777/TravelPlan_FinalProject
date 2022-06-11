@@ -32,8 +32,8 @@ class ServerApi {
             }
 
 
-                val gson = GsonBuilder().setDateFormat("yyyy-MM-dd")
-
+                val gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .registerTypeAdapter(Date::class.java, DateDeserializer())
                     .create()
 
             val myClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -41,7 +41,7 @@ class ServerApi {
             retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(myClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
         }

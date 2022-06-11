@@ -3,7 +3,7 @@ package com.example.travelplan_finalproject.models
 import com.google.gson.annotations.SerializedName
 
 
-class DataResponse (
+data class DataResponse (
     val user : UserData,
     val token : String,
     val code : Int,

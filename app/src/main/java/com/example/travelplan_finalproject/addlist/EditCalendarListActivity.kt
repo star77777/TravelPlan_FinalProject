@@ -99,11 +99,11 @@ class EditCalendarListActivity : BaseActivity() {
 
 //            2. 날짜/시간이 선택이 되었는가?
 //             =>날짜 / 기간 중 선택 안한게 있다면, 선택하라고 토스트 함수를 강제 종료하자.
-            if (binding.firstDateTxt.text == "일자 선택") {
+            if (binding.firstDateTxt.text == "가는 날") {
                 Toast.makeText(mContext, "약속 일자를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (binding.lastDateTxt.text == "일자 선택") {
+            if (binding.lastDateTxt.text == "오는 날") {
                 Toast.makeText(mContext, "약속 일자를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

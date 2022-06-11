@@ -18,14 +18,16 @@ import java.text.SimpleDateFormat
 class CalendarListRecylerViewAdapter(
     val mContext: Context,
     val mList: List<CalendarListData>,
-    type: Boolean,
+    isInvited: Boolean,
 
 
     ) : RecyclerView.Adapter<CalendarListRecylerViewAdapter.ItemViewHolder>() {
    inner class ItemViewHolder (val binding : ListItemTravelListBinding) : RecyclerView.ViewHolder(binding.root) {
        fun bind(item :CalendarListData) {
+           val sdf = SimpleDateFormat("M/d a h:mm")
            binding.titleTxt.text = item.title
 
+           binding.dateTxt.text = "${sdf.format(item.datetime)}"
            binding.placeTxt.text = "약속 장소 : ${item.place}"
        }
 

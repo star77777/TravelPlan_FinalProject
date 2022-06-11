@@ -1,5 +1,6 @@
 package com.example.travelplan_finalproject.models
 
+import com.google.gson.annotations.SerializedName
 
 
 class DataResponse (
@@ -9,7 +10,9 @@ class DataResponse (
     val message : String,
     val data : DataResponse,
     val users : List<UserData>,
+    @SerializedName("appointment")
     val calendarlist : CalendarListData,
+    @SerializedName("appointments")
     val calendarlists : List<CalendarListData>,
 ) {
 }

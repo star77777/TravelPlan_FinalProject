@@ -20,18 +20,20 @@ import retrofit2.Response
 
 class CalendarListFragment : BaseFragment() {
 
-    lateinit var binding : ActivityCalendarListFragmentBinding
- lateinit var mCalendarAdaper:CalendarListRecylerViewAdapter
+    lateinit var binding: ActivityCalendarListFragmentBinding
+    lateinit var mCalendarAdaper: CalendarListRecylerViewAdapter
     var mCalendarList = ArrayList<CalendarListData>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,
+        binding = DataBindingUtil.inflate(
+            inflater,
             R.layout.activity_calendar_list_fragment,
             container,
-            false)
+            false
+        )
         return binding.root
     }
 
@@ -48,16 +50,18 @@ class CalendarListFragment : BaseFragment() {
             startActivity(myIntent)
         }
     }
+
     override fun onResume() {
         super.onResume()
-       // getCalendarListFromServer()
+        getCalendarListFromServer()
     }
 
     override fun setValues() {
-        mCalendarAdaper = CalendarListRecylerViewAdapter(mContext,mCalendarList,false)
-        binding.calendarListsRecyclerView.adapter=mCalendarAdaper
+        mCalendarAdaper = CalendarListRecylerViewAdapter(mContext, mCalendarList, false)
+        binding.calendarListsRecyclerView.adapter = mCalendarAdaper
         binding.calendarListsRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
+
     fun getCalendarListFromServer() {
         apiList.getRequestdataList().enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
@@ -65,7 +69,7 @@ class CalendarListFragment : BaseFragment() {
                     val br = response.body()!!
                     mCalendarList.clear()
                     mCalendarList.addAll(br.data.calendarlists)
-                   // mCalendarAdaper.notifyDataSetChanged()
+                    mCalendarAdaper.notifyDataSetChanged()
                 }
             }
 

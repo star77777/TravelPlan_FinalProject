@@ -109,11 +109,11 @@ class EditCalendarListActivity : BaseActivity() {
             }
 
 
-            var calcuDate=(mSelectedDateTime.time.time-mSelectedDateTime2.time.time)
+           // var calcuDate=(mSelectedDateTime.time.time-mSelectedDateTime2.time.time)
 
-            Log.d("test:날짜!","$calcuDate 일 차이남!!")
+           // Log.d("test:날짜!","$calcuDate 일 차이남!!")
 
-            val challengeDay =(calcuDate+1).toInt()
+           // val challengeDay =(calcuDate+1).toInt()
             //binding.challengeCountdownDay.text ="Day $(challengeDay)"
 //            서버에서 요구한 약속일시 양식대로 변환하여 전달
             val sdf = SimpleDateFormat("yyyy-MM-dd")

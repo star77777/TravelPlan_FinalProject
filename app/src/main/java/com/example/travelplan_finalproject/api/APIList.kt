@@ -11,7 +11,7 @@ interface APIList {
     fun getRequestdataList() : Call<BasicResponse>
 
     @FormUrlEncoded
-    @POST("/travelList")
+    @POST("/appointment")
     fun postRequestdataList(
         @Field("title") title: String,
         @Field("datetime") datetime: String,

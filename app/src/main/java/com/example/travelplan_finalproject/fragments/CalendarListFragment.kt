@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan_finalproject.R
 import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapter
 import com.example.travelplan_finalproject.addlist.EditCalendarListActivity
+import com.example.travelplan_finalproject.addlist.TodoListActivity
 import com.example.travelplan_finalproject.databinding.ActivityCalendarListFragmentBinding
 import com.example.travelplan_finalproject.models.BasicResponse
 import com.example.travelplan_finalproject.models.CalendarListData
@@ -31,6 +32,7 @@ class CalendarListFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.activity_calendar_list_fragment,
+           // R.layout.list_item_travel_list,
             container,
             false
         )
@@ -49,6 +51,8 @@ class CalendarListFragment : BaseFragment() {
             val myIntent = Intent(mContext, EditCalendarListActivity::class.java)
             startActivity(myIntent)
         }
+
+
     }
 
     override fun onResume() {

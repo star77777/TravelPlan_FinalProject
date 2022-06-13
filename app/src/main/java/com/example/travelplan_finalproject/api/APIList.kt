@@ -7,8 +7,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface APIList {
+
+
     @GET("/appointment")
-    fun getRequestMdataList() : Call<BasicResponse>
+    fun getRequestMdataList(): Call<BasicResponse>
 
     @FormUrlEncoded
     @POST("/appointment")
@@ -18,43 +20,47 @@ interface APIList {
         @Field("place") place: String,
         @Field("latitude") latitude: Double,
         @Field("longitude") longitude: Double,
-        ): Call<BasicResponse>
+    ): Call<BasicResponse>
 
     @GET("/user")
-    fun getRequestMyInfo() : Call<BasicResponse>
+    fun getRequestMyInfo(): Call<BasicResponse>
 
     @FormUrlEncoded
     @PATCH("/user")
     fun patchRequestEditUserInfo(
-        @Field("field") field : String,
+        @Field("field") field: String,
         @Field("value") value: String,
-    ) : Call<BasicResponse>
+    ): Call<BasicResponse>
 
     @FormUrlEncoded
     @POST("/user")
-    fun postRequestLogin (
+    fun postRequestLogin(
         @Field("email") email: String,
-        @Field("password") password : String,
-    ) : Call<BasicResponse>
+        @Field("password") password: String,
+    ): Call<BasicResponse>
 
     @FormUrlEncoded
     @PUT("/user")
     fun putRequestSignUp(
-        @Field("email") email : String,
-        @Field("password") pw : String,
-        @Field("nick_name") nickname : String,
-    ) : Call<BasicResponse>
+        @Field("email") email: String,
+        @Field("password") pw: String,
+        @Field("nick_name") nickname: String,
+    ): Call<BasicResponse>
 
     @GET("/user/check")
-    fun getRequestUserCheck (
-        @Query("type") type : String,
-        @Query("value") value : String,
-    ) : Call<BasicResponse>
+    fun getRequestUserCheck(
+        @Query("type") type: String,
+        @Query("value") value: String,
+    ): Call<BasicResponse>
 
     @Multipart
     @PUT("/user/image")
-    fun putRequestUserImage(@Part profileImg : MultipartBody.Part) : Call<BasicResponse>
+    fun putRequestUserImage(@Part profileImg: MultipartBody.Part): Call<BasicResponse>
 
 
-    }
+
+
+
+}
+
 

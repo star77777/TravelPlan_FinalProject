@@ -3,17 +3,25 @@ package com.example.travelplan_finalproject.addlist
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
+import android.util.Log
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
+import com.example.travelplan_finalproject.api.APIList
 import com.example.travelplan_finalproject.databinding.ActivityEditTodoListBinding
+import com.example.travelplan_finalproject.models.BasicResponse
+import com.example.travelplan_finalproject.naver.ApIListNaver
+import com.example.travelplan_finalproject.naver.BasicResponseNaver
+import com.example.travelplan_finalproject.naver.NaverApiData
+import com.example.travelplan_finalproject.naver.NaverServerApi
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,20 +29,25 @@ import java.util.*
 class TodoListActivity : BaseActivity() {
     lateinit var binding: ActivityEditTodoListBinding
 
+    var mPlaceList = ArrayList<NaverApiData>()
+
     //    선택한 약속 일시를 저장할 멤버변수
     val mSelectedDateTime2 = Calendar.getInstance()!!// 기본값 : 현재시간
+    var mSelectedLatitude = 37.5779235853308
+    var mSelectedLongitude = 127.033553463647
 
-    val clientId = "client id"
-    val clientSecret = "client secret"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_todo_list)
+        val retrofit = NaverServerApi.getRetrofit(this)
+        val APIListNaver = retrofit.create(ApIListNaver::class.java)
 
 
         setupEvents()
         setValues()
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun setupEvents() {
@@ -60,6 +73,34 @@ class TodoListActivity : BaseActivity() {
                 false
             ).show()
         }
+        binding.placeSearchBtn.setOnClickListener {
+            val inputKeyword = binding.placeNameEdt.text.toString()
+            if (inputKeyword.length < 2) {
+                Toast.makeText(this, "검색어는 두글자 이상 작성해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            apiListNaver.getSearchlocal(inputKeyword, 5)
+                .enqueue(object : Callback<BasicResponseNaver> {
+                    override fun onResponse(
+                        call: Call<BasicResponseNaver>,
+                        response: Response<BasicResponseNaver>
+                    ) {
+                        Log.d("json", response.toString())
+
+                        if (response.isSuccessful) {
+                            Log.d("성공", response.body().toString())
+
+                            mPlaceList.clear()
+                            mPlaceList.addAll(response.body()!!.items)
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponseNaver>, t: Throwable) {
+                        Log.d("서버 실패", t.toString())
+                    }
+                })
+        }
 
     }
 
@@ -67,4 +108,5 @@ class TodoListActivity : BaseActivity() {
 
     }
 }
+
 

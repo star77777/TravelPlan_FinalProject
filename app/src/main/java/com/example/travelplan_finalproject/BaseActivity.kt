@@ -11,6 +11,8 @@ import androidx.appcompat.widget.Toolbar
 import com.example.travelplan_finalproject.addlist.EditCalendarListActivity
 import com.example.travelplan_finalproject.api.APIList
 import com.example.travelplan_finalproject.api.ServerApi
+import com.example.travelplan_finalproject.naver.ApIListNaver
+import com.example.travelplan_finalproject.naver.NaverServerApi
 import retrofit2.Retrofit
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -20,7 +22,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     //  lateinit var titleTxt : TextView
     lateinit var retrofit: Retrofit
+    lateinit var retrofit2: Retrofit
     lateinit var apiList: APIList
+    lateinit var apiListNaver: ApIListNaver
     lateinit var addBtn: ImageView
     // mSelectedDateTime = Calendar.getInstance ()  // Calendar () 생성자 사용 X
     //val mSelectedDateTime2 = Calendar.getInstance ()
@@ -30,7 +34,9 @@ abstract class BaseActivity : AppCompatActivity() {
         mContext = this
 
         retrofit = ServerApi.getRetrofit(mContext)
+        retrofit2 = NaverServerApi.getRetrofit(mContext)
         apiList = retrofit.create(APIList::class.java)
+        apiListNaver = retrofit2.create(ApIListNaver::class.java)
     }
 
     abstract fun setupEvents()

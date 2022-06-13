@@ -14,7 +14,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TravelPlan_FinalProject">
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:theme="@style/Theme.TravelPlan_FinalProject"
+
+        >
 
         <activity
             android:name=".addlist.TodoListActivity"
@@ -42,6 +46,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
+<!--        <meta-data-->
+<!--            android:name="com.naver.maps.map.CLIENT_ID"-->
+<!--            android:value="3S3FBRp0T5yGsWX5zmlV" />-->
     </application>
 
 </manifest>

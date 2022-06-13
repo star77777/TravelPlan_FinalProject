@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelplan_finalproject.databinding.ListItemTodoListsBinding
-import com.example.travelplan_finalproject.models.TodoListDatas
+import com.example.travelplan_finalproject.models.CalendarListData
 import java.text.SimpleDateFormat
 
 class TodoListRecyclerViewAdapers(
-    val mContext : Context,
-    val mLists : List<TodoListDatas>,
-    val isInvited : Boolean
-): RecyclerView.Adapter<TodoListRecyclerViewAdapers.ItemHourViewHolder>() {
+    val mContext: Context,
+    val mList: List<CalendarListData>,
+
+    val isInvited: Boolean
+) : RecyclerView.Adapter<TodoListRecyclerViewAdapers.ItemHourViewHolder>() {
     inner class ItemHourViewHolder(val binding: ListItemTodoListsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : TodoListDatas) {
+        fun bind(item: CalendarListData) {
             binding.titleHourTxt.text = item.title
 
             val sdfs = SimpleDateFormat("M/d a h:mm")
@@ -29,14 +30,15 @@ class TodoListRecyclerViewAdapers(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHourViewHolder {
         return ItemHourViewHolder(
             ListItemTodoListsBinding
-                .inflate(LayoutInflater.from(mContext), parent, false))
+                .inflate(LayoutInflater.from(mContext), parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ItemHourViewHolder, position: Int) {
-        holder.bind(mLists[position])
+        holder.bind(mList[position])
     }
 
     override fun getItemCount(): Int {
-        return mLists.size
+        return mList.size
     }
 }

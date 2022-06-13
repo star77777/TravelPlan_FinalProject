@@ -3,33 +3,20 @@ package com.example.travelplan_finalproject.addlist
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.app.LauncherActivity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-
 import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
-import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapter
-import com.example.travelplan_finalproject.databinding.ActivityCalendarListFragmentBinding
 import com.example.travelplan_finalproject.databinding.ActivityEditCalendarListBinding
 import com.example.travelplan_finalproject.models.BasicResponse
-import com.example.travelplan_finalproject.models.CalendarListData
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 public class EditCalendarListActivity : BaseActivity() {
@@ -39,7 +26,7 @@ public class EditCalendarListActivity : BaseActivity() {
 
     //    선택한 약속 일시를 저장할 멤버변수
     val mSelectedDateTime = Calendar.getInstance()!!  // 기본값 : 현재시간
-    val mSelectedDateTime2= Calendar.getInstance()!!
+
     //  var mSelectedLatLng : LatLng? = null
 
 
@@ -85,29 +72,7 @@ public class EditCalendarListActivity : BaseActivity() {
 ////        //오늘날
 ////        //            날짜 선택
        //가는 날
-                binding.lastDateTxt.setOnClickListener {
-////            날짜를 선택하고 할 일(인터페이스)를 작성
-                    val da = object : DatePickerDialog.OnDateSetListener {
-                        override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
-                            mSelectedDateTime2.set(year, month, day)
-                            val sda = SimpleDateFormat("yyyy. M. d")
-                            Log.d("선택된 시간", sda.format(mSelectedDateTime2.time))
-//
-                            binding.lastDateTxt.text = sda.format(mSelectedDateTime2.time)
-                        }
-                    }
-//
-//////            DatePickerDialog 팝업
-                    val dpa = DatePickerDialog(
-                        mContext,
-                        da,
-                        mSelectedDateTime2.get(Calendar.YEAR),
-                        mSelectedDateTime2.get(Calendar.MONTH),
-                        mSelectedDateTime2.get(Calendar.DAY_OF_MONTH)
-                    )
-//
-                    dpa.show()
-                }
+
 
 //}
 
@@ -138,7 +103,7 @@ public class EditCalendarListActivity : BaseActivity() {
             //binding.challengeCountdownDay.text ="Day $(challengeDay)"
 //            서버에서 요구한 약속일시 양식대로 변환하여 전달
             val sdf = SimpleDateFormat("yyyy-MM-dd")
-            val sda = SimpleDateFormat("yyyy. MM. dd")
+
             val latitude = 0.0
             val longitude = 0.0
 

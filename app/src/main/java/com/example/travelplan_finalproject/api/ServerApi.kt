@@ -19,7 +19,7 @@ class ServerApi {
         fun getRetrofit(context: Context): Retrofit {
             if (retrofit == null) {
 
-            //                API요청이 발생하면 => 가로채서 => 헤더를 추가해주자.
+//                API요청이 발생하면 => 가로채서 => 헤더를 추가해주자.
 //                자동으로 헤더를 달아주는 효과 발생
 
             val interceptor = Interceptor {

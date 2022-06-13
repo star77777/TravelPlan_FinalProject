@@ -1,29 +1,16 @@
 package com.example.travelplan_finalproject.adapters
 
-import android.app.LauncherActivity
 import android.content.Context
 import android.content.Intent
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.travelplan_finalproject.R
 import com.example.travelplan_finalproject.addlist.TodoListActivity
-import com.example.travelplan_finalproject.api.APIList
-import com.example.travelplan_finalproject.api.ServerApi
-
 import com.example.travelplan_finalproject.databinding.ListItemTravelListBinding
 import com.example.travelplan_finalproject.models.CalendarListData
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import java.text.SimpleDateFormat
 
 class CalendarListRecylerViewAdapter(

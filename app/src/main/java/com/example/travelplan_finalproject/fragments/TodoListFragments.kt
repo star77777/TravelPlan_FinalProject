@@ -15,6 +15,7 @@ import com.example.travelplan_finalproject.adapters.TodoListRecyclerViewAdapers
 import com.example.travelplan_finalproject.addlist.TodoListActivity
 import com.example.travelplan_finalproject.databinding.ActivityTodoListFragmentsBinding
 import com.example.travelplan_finalproject.models.BasicResponse
+import com.example.travelplan_finalproject.models.CalendarListData
 import com.example.travelplan_finalproject.models.TodoListDatas
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +25,7 @@ class TodoListFragments : BaseFragment() {
 
     lateinit var binding: ActivityTodoListFragmentsBinding
     lateinit var mTodoListAdapter: TodoListRecyclerViewAdapers
-    var mTodoListList = ArrayList<TodoListDatas>()
+    var mTodoList = ArrayList<CalendarListData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +60,7 @@ class TodoListFragments : BaseFragment() {
     }
 
     override fun setValues() {
-        mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoListList,false)
+        mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoList, false)
         binding.hourListRecyclerView.adapter = mTodoListAdapter
         binding.hourListRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
@@ -69,8 +70,8 @@ class TodoListFragments : BaseFragment() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
-                    mTodoListList.clear()
-                    mTodoListList.addAll(br.data.Todolists)
+                    mTodoList.clear()
+                    mTodoList.addAll(br.data.calendarlists)
 
                     mTodoListAdapter.notifyDataSetChanged()
                 }

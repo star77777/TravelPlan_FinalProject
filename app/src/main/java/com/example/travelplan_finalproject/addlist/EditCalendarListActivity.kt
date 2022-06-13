@@ -48,6 +48,7 @@ public class EditCalendarListActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_calendar_list)
 
 
+
         setupEvents()
         setValues()
 

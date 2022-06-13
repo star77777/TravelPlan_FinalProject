@@ -3,7 +3,7 @@ package com.example.travelplan_finalproject.models
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class TodoListDatas(
+data class TodoListDatas(
     val id : Int,
     val title : String,
     val datetime : Date,

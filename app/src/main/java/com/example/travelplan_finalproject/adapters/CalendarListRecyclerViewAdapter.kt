@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.travelplan_finalproject.R
@@ -36,7 +37,6 @@ class CalendarListRecylerViewAdapter(
         fun onClick(view: View, position: Int)
     }
 
-    var itemClick: ItemClick? = null
 
     inner class ItemViewHolder(var binding: ListItemTravelListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -66,8 +66,9 @@ class CalendarListRecylerViewAdapter(
                 return@OnLongClickListener true
             })
 
-        }
 
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -91,8 +92,13 @@ class CalendarListRecylerViewAdapter(
             val intent = Intent(holder.itemView?.context, TodoListActivity::class.java)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
-    }
 
+//        holder.itemView.setOnLongClickListener {
+
+
+       // }
+
+    }
     override fun getItemCount(): Int {
         return mList.size
     }

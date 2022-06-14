@@ -22,7 +22,7 @@ import java.util.*
 public class EditCalendarListActivity : BaseActivity() {
     lateinit var binding: ActivityEditCalendarListBinding
 
-   // private lateinit var rv: RecyclerView
+    // private lateinit var rv: RecyclerView
 
     //    선택한 약속 일시를 저장할 멤버변수
     val mSelectedDateTime = Calendar.getInstance()!!  // 기본값 : 현재시간
@@ -33,9 +33,6 @@ public class EditCalendarListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_calendar_list)
-
-
-
         setupEvents()
         setValues()
 
@@ -59,19 +56,19 @@ public class EditCalendarListActivity : BaseActivity() {
             }
 //
 //////            DatePickerDialog 팝업
-                    val dpd = DatePickerDialog(
-                        mContext,
-                        dl,
-                        mSelectedDateTime.get(Calendar.YEAR),
-                        mSelectedDateTime.get(Calendar.MONTH),
-                        mSelectedDateTime.get(Calendar.DAY_OF_MONTH)
-                    )
+            val dpd = DatePickerDialog(
+                mContext,
+                dl,
+                mSelectedDateTime.get(Calendar.YEAR),
+                mSelectedDateTime.get(Calendar.MONTH),
+                mSelectedDateTime.get(Calendar.DAY_OF_MONTH)
+            )
 //
-                    dpd.show()
-                }
+            dpd.show()
+        }
 ////        //오늘날
 ////        //            날짜 선택
-       //가는 날
+        //가는 날
 
 
 //}
@@ -89,17 +86,13 @@ public class EditCalendarListActivity : BaseActivity() {
                 Toast.makeText(mContext, "약속 일자를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (binding.lastDateTxt.text == "오는 날") {
-                Toast.makeText(mContext, "약속 일자를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
 
 
-           // var calcuDate=(mSelectedDateTime.time.time-mSelectedDateTime2.time.time)
+            // var calcuDate=(mSelectedDateTime.time.time-mSelectedDateTime2.time.time)
 
-           // Log.d("test:날짜!","$calcuDate 일 차이남!!")
+            // Log.d("test:날짜!","$calcuDate 일 차이남!!")
 
-           // val challengeDay =(calcuDate+1).toInt()
+            // val challengeDay =(calcuDate+1).toInt()
             //binding.challengeCountdownDay.text ="Day $(challengeDay)"
 //            서버에서 요구한 약속일시 양식대로 변환하여 전달
             val sdf = SimpleDateFormat("yyyy-MM-dd")
@@ -113,7 +106,7 @@ public class EditCalendarListActivity : BaseActivity() {
             apiList.postRequestdataList(
                 inputTitle,
                 sdf.format(mSelectedDateTime.time),
-              //  sda.format(mSelectedDateTime2.time),
+                //  sda.format(mSelectedDateTime2.time),
                 inputPlaceName,
                 latitude,
                 longitude,
@@ -127,8 +120,7 @@ public class EditCalendarListActivity : BaseActivity() {
                         Toast.makeText(mContext, "일정이 등록되었습니다.", Toast.LENGTH_SHORT).show()
                         Log.d("현재올린 일정정보", response.body()!!.data.calendarlist.toString())
                         finish()
-                    }
-                    else {
+                    } else {
                         val errorBodyStr = response.errorBody()!!.string()
                         val jsonObj = JSONObject(errorBodyStr)
                         val message = jsonObj.getString("message")
@@ -158,7 +150,7 @@ public class EditCalendarListActivity : BaseActivity() {
 //            val intent = Intent(context,TodoListActivity::class.java)
 //            startActivity(intent)
 //        }
-   // }
+    // }
 }
 
 

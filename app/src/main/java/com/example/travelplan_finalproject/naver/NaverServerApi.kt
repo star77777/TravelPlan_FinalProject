@@ -1,15 +1,11 @@
 package com.example.travelplan_finalproject.naver
 
 import android.content.Context
-import com.example.travelplan_finalproject.api.DateDeserializer
-import com.example.travelplan_finalproject.utils.ContextUtil
-import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.util.*
 
 
 class NaverServerApi {
@@ -19,20 +15,20 @@ class NaverServerApi {
 
 
         private var retrofit2: Retrofit? = null
-        private  val baseUrl2 = "https://openapi.naver.com/v1/"
+        private  val baseUrl2 = "https://openapi.naver.com/v1/search/"
         fun getRetrofit(context : Context): Retrofit {
-        val naverClientId = "3S3FBRp0T5yGsWX5zmlV"
-        val naverClientSecret = "2HPzpdAXcL"
+        val naverClientId="3S3FBRp0T5yGsWX5zmlV"
+        val naverClientSecret="rWDGl8JtH2"
 
 
         val interceptor = Interceptor {
-            with(it) {
-                val newRequest = request().newBuilder()
-                    .addHeader("X-Naver-Client-Id", naverClientId)
-                    .addHeader("X-Naver-Client-Secret", naverClientSecret)
-                    .build()
+       with(it) {
+               val newRequest = request().newBuilder()
+                    .addHeader("X-Naver-Client-Id",naverClientId)
+                    .addHeader("X-Naver-Client-Secret",naverClientSecret)
+                   .build()
                 proceed(newRequest)
-            }
+          }
         }
 
         val myClient = OkHttpClient.Builder().addInterceptor(interceptor).build()

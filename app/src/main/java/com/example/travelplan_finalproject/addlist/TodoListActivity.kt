@@ -3,22 +3,25 @@ package com.example.travelplan_finalproject.addlist
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
+import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
-import com.example.travelplan_finalproject.api.APIList
 import com.example.travelplan_finalproject.databinding.ActivityEditTodoListBinding
-import com.example.travelplan_finalproject.models.BasicResponse
 import com.example.travelplan_finalproject.naver.ApIListNaver
 import com.example.travelplan_finalproject.naver.BasicResponseNaver
 import com.example.travelplan_finalproject.naver.NaverApiData
 import com.example.travelplan_finalproject.naver.NaverServerApi
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,8 +43,9 @@ class TodoListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_todo_list)
-        val retrofit = NaverServerApi.getRetrofit(this)
-        val APIListNaver = retrofit.create(ApIListNaver::class.java)
+
+
+
 
 
         setupEvents()
@@ -79,7 +83,12 @@ class TodoListActivity : BaseActivity() {
                 Toast.makeText(this, "검색어는 두글자 이상 작성해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            apiListNaver.getSearchlocal(inputKeyword, 5)
+            val retrofit2 = NaverServerApi.getRetrofit(this)
+            val apIListNaver = retrofit2.create(ApIListNaver::class.java)
+
+
+
+            apIListNaver.getSearchlocal(inputKeyword, 5)
                 .enqueue(object : Callback<BasicResponseNaver> {
                     override fun onResponse(
                         call: Call<BasicResponseNaver>,
@@ -90,6 +99,28 @@ class TodoListActivity : BaseActivity() {
                         if (response.isSuccessful) {
                             Log.d("성공", response.body().toString())
 
+                            fun bind (item : NaverApiData) {
+
+                                binding.placeTitleTxt.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
+                                } else {
+                                    Html.fromHtml(item.title).toString()    }
+
+                                binding.placeAddressTxt.text = item.roadAddress
+
+                                binding.placeSearchBtn.setOnClickListener {
+                                    //스크롤 뷰 참조하기
+                                    var myText:TextView =findViewById(R.id.placeTitleTxt)
+                                    myText.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
+                                   // ScrollView NestedScrollView= findViewById(R.id.NestedScrollView);
+
+                                    var myAddressText:TextView =findViewById(R.id.placeAddressTxt)
+                                    myAddressText.text =  item.roadAddress
+                                    //스크롤뷰의 스크롤위치를 가장 아래쪽으로 이동
+                                   // NestedScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                                }
+
+                            }
                             mPlaceList.clear()
                             mPlaceList.addAll(response.body()!!.items)
 

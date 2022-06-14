@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat
 class TodoListRecyclerViewAdapers(
     val mContext: Context,
     val mList: List<CalendarListData>,
-
     val isInvited: Boolean
 ) : RecyclerView.Adapter<TodoListRecyclerViewAdapers.ItemHourViewHolder>() {
     inner class ItemHourViewHolder(val binding: ListItemTodoListsBinding) :

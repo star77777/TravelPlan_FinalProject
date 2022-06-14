@@ -1,59 +1,56 @@
 package com.example.travelplan_finalproject.fragments
 
 
+import android.annotation.SuppressLint
+import android.app.TimePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
+import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapter
 import com.example.travelplan_finalproject.adapters.TodoListRecyclerViewAdapers
-import com.example.travelplan_finalproject.addlist.TodoListActivity
+import com.example.travelplan_finalproject.addlist.TodoListActivityfagxx
+import com.example.travelplan_finalproject.databinding.ActivityEditTodoListBinding
 import com.example.travelplan_finalproject.databinding.ActivityTodoListFragmentsBinding
 import com.example.travelplan_finalproject.models.BasicResponse
 import com.example.travelplan_finalproject.models.CalendarListData
-import com.example.travelplan_finalproject.models.TodoListDatas
+import com.example.travelplan_finalproject.naver.data.NaverApiData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TodoListFragments : BaseFragment() {
+import java.text.SimpleDateFormat
+import java.util.*
 
-    lateinit var binding: ActivityTodoListFragmentsBinding
+class TodoListActivity : BaseActivity() {
+
+    lateinit var binding:ActivityEditTodoListBinding
+
     lateinit var mTodoListAdapter: TodoListRecyclerViewAdapers
+    lateinit var mCalendarAdaper: CalendarListRecylerViewAdapter
+
     var mTodoList = ArrayList<CalendarListData>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.activity_todo_list_fragments,
-            container,
-            false
-        )
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_todo_list)
+
         setupEvents()
         setValues()
     }
 
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun setupEvents() {
         binding.addHourListBtn.setOnClickListener {
-            val myIntent = Intent(mContext, TodoListActivity::class.java)
+            val myIntent = Intent(mContext, TodoListActivityfagxx::class.java)
             startActivity(myIntent)
         }
     }
-
     override fun onResume() {
         super.onResume()
         getMyAppointmentListFromServer()
@@ -63,6 +60,7 @@ class TodoListFragments : BaseFragment() {
         mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoList, false)
         binding.hourListRecyclerView.adapter = mTodoListAdapter
         binding.hourListRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
     }
 
     fun getMyAppointmentListFromServer() {
@@ -72,7 +70,6 @@ class TodoListFragments : BaseFragment() {
                     val br = response.body()!!
                     mTodoList.clear()
                     mTodoList.addAll(br.data.calendarlists)
-
                     mTodoListAdapter.notifyDataSetChanged()
                 }
             }
@@ -84,3 +81,5 @@ class TodoListFragments : BaseFragment() {
 
     }
 }
+
+

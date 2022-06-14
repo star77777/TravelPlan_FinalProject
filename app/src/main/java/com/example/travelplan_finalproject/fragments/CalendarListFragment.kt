@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelplan_finalproject.R
 import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapter
 import com.example.travelplan_finalproject.addlist.EditCalendarListActivity
-import com.example.travelplan_finalproject.addlist.TodoListActivity
 import com.example.travelplan_finalproject.databinding.ActivityCalendarListFragmentBinding
 import com.example.travelplan_finalproject.models.BasicResponse
 import com.example.travelplan_finalproject.models.CalendarListData

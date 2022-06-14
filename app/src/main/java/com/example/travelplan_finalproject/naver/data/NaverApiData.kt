@@ -1,4 +1,4 @@
-package com.example.travelplan_finalproject.naver
+package com.example.travelplan_finalproject.naver.data
 
 import java.io.Serializable
 

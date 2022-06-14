@@ -1,15 +1,11 @@
 package com.example.travelplan_finalproject.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.travelplan_finalproject.BaseActivity
 import com.example.travelplan_finalproject.R
-import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapter
 import com.example.travelplan_finalproject.adapters.MainViewPagerAdapter
-import com.example.travelplan_finalproject.addlist.TodoListActivity
 import com.example.travelplan_finalproject.databinding.ActivityMainBinding
 
 class MainActivity  : BaseActivity() {

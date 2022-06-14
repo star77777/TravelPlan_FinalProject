@@ -1,14 +1,13 @@
 package com.example.travelplan_finalproject.adapters
-
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.travelplan_finalproject.addlist.TodoListActivity
+import com.example.travelplan_finalproject.fragments.TodoListActivity
 import com.example.travelplan_finalproject.databinding.ListItemTravelListBinding
 import com.example.travelplan_finalproject.models.CalendarListData
 import java.text.SimpleDateFormat
@@ -37,12 +36,14 @@ class CalendarListRecylerViewAdapter(
         }
 
         init {
+
             this.binding = binding
 
             //item Click Listener
             binding.TodayEdt.setOnClickListener(View.OnClickListener {
                 val pos = adapterPosition
                 Log.d("click", pos.toString() + " : click!")
+               // return@OnLongClickListener true
 
             })
 
@@ -77,7 +78,10 @@ class CalendarListRecylerViewAdapter(
 //            })
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context, TodoListActivity::class.java)
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+               startActivity(holder.itemView.context, intent, null)
+           // val intent = Intent(this, TodoListActivityfrag::class.java)
+           // startActivity(intent)
+
         }
 
 //        holder.itemView.setOnLongClickListener {
@@ -86,6 +90,9 @@ class CalendarListRecylerViewAdapter(
        // }
 
     }
+
+
+
     override fun getItemCount(): Int {
         return mList.size
     }

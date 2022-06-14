@@ -21,12 +21,14 @@
         >
 
         <activity
-            android:name=".addlist.TodoListActivity"
+            android:name=".fragments.TodoListActivity"
             android:exported="false" />
         <activity
             android:name=".addlist.EditCalendarListActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".addlist.TodoListActivityfagxx"
+            android:exported="false" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
@@ -46,9 +48,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
-<!--        <meta-data-->
-<!--            android:name="com.naver.maps.map.CLIENT_ID"-->
-<!--            android:value="3S3FBRp0T5yGsWX5zmlV" />-->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+           android:value="g0k1f55l7j" />
     </application>
 
 </manifest>

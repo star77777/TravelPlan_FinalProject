@@ -176,13 +176,7 @@ class SettingsFragment : BaseFragment() {
     override fun setValues() {
         setUserData()
 
-        when (GlobalData.loginUser!!.provider) {
-            "kakao" -> {
-            }
-            "facebook" -> {
-            }
-            else -> binding.socialLoginImg.visibility = View.GONE
-        }
+
     }
 
     fun setUserData() {
@@ -193,7 +187,6 @@ class SettingsFragment : BaseFragment() {
 
 
     }
-
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {

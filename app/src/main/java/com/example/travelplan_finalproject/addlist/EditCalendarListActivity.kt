@@ -3,6 +3,7 @@ package com.example.travelplan_finalproject.addlist
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
@@ -74,6 +75,9 @@ public class EditCalendarListActivity : BaseActivity() {
 //}
 
         binding.addBtn.setOnClickListener {
+
+
+
 
             //            1. 약속의 제목 정했는가
 //            1. 약속의 제목 정했는가

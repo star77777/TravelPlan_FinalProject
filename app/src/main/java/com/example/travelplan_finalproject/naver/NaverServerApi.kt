@@ -14,9 +14,9 @@ class NaverServerApi {
     companion object {
 
 
-        private var retrofit2: Retrofit? = null
+        private var retrofit: Retrofit? = null
         private  val baseUrl2 = "https://openapi.naver.com/v1/search/"
-        fun getRetrofit(context : Context): Retrofit {
+        fun getRetrofit(): Retrofit {
         val naverClientId="3S3FBRp0T5yGsWX5zmlV"
         val naverClientSecret="rWDGl8JtH2"
 
@@ -33,9 +33,9 @@ class NaverServerApi {
 
         val myClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
-        if (retrofit2 == null)
+        if (retrofit == null)
         {
-            retrofit2 = Retrofit.Builder()
+            retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl2)
                 .client(myClient)
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -43,7 +43,7 @@ class NaverServerApi {
                 .build()
         }
 
-        return retrofit2!!
+        return retrofit!!
 
     }
 

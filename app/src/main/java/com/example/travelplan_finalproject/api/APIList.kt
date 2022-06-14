@@ -8,6 +8,12 @@ import retrofit2.http.*
 
 interface APIList {
 
+    @FormUrlEncoded
+    @PATCH("/user/password")
+    fun patchPasswordChange(
+        @Field("current_password") current_password: String,
+        @Field("new_password ") new_password: String,
+    ): Call<BasicResponse>
 
     @GET("/appointment")
     fun getRequestMdataList(): Call<BasicResponse>
@@ -56,9 +62,6 @@ interface APIList {
     @Multipart
     @PUT("/user/image")
     fun putRequestUserImage(@Part profileImg: MultipartBody.Part): Call<BasicResponse>
-
-
-
 
 
 }

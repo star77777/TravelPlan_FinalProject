@@ -2,8 +2,8 @@ package com.example.travelplan_finalproject.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -35,7 +35,7 @@ import java.io.File
 class SettingsFragment : BaseFragment() {
 
     lateinit var binding: ActivitySettingsFragmentBinding
-
+    var isPwDupOk = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +53,9 @@ class SettingsFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+
+
 //        프로필 이미지 변경 이벤트
         binding.profileImg.setOnClickListener {
             //    갤러리를 개발자가 이용 : 유저 허락을 받아야한다. => 권한 세팅
@@ -136,7 +139,29 @@ class SettingsFragment : BaseFragment() {
 
 //        비밀번호 변경 이벤트
         binding.changePwLayout.setOnClickListener {
+            val alert = CustomAlertDialog(mContext, requireActivity())
+            alert.myDialog()
 
+            alert.binding.titleTxt.text="비밀번호 변경"
+            alert.binding.bodyTxt.text="현재 비밀번호"
+            alert.binding.positiveBtn.setOnClickListener {
+
+                ContextUtil.clear(mContext)
+
+               .contentEdt.addTextChangedListener {
+                    isPwDupOk = (it.toString() == binding.pwDupEdt.text.toString())
+                }
+
+
+                val myIntent = Intent(mContext, LoginActivity::class.java)
+                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(myIntent)
+                alert.dialog.dismiss()
+
+            }
+            alert.binding.negativeBtn.setOnClickListener {
+                alert.dialog.dismiss()
+            }
         }
 
 

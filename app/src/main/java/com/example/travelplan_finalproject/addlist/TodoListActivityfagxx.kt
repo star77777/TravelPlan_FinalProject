@@ -148,7 +148,7 @@ class TodoListActivityfagxx : BaseActivity() {
         }
 
         binding.addBtn2.setOnClickListener {
-            val sdf = SimpleDateFormat("yyyy-MM-dd 12:11:11")
+            val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm")
             //    val inputPlaceName = CalendarListData.inputTitle
             //binding.placeNameEdt.text.toString()
 

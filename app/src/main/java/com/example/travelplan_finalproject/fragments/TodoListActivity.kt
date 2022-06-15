@@ -14,9 +14,9 @@ import com.example.travelplan_finalproject.adapters.CalendarListRecylerViewAdapt
 import com.example.travelplan_finalproject.adapters.TodoListRecyclerViewAdapers
 import com.example.travelplan_finalproject.addlist.TodoListActivityfagxx
 import com.example.travelplan_finalproject.databinding.ActivityEditTodoListBinding
-import com.example.travelplan_finalproject.databinding.ActivityTodoListFragmentsBinding
 import com.example.travelplan_finalproject.models.BasicResponse
 import com.example.travelplan_finalproject.models.CalendarListData
+import com.example.travelplan_finalproject.models.TodoListDatas
 import com.example.travelplan_finalproject.naver.data.NaverApiData
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,12 +27,13 @@ import java.util.*
 
 class TodoListActivity : BaseActivity() {
 
-    lateinit var binding:ActivityEditTodoListBinding
+    lateinit var binding: ActivityEditTodoListBinding
 
     lateinit var mTodoListAdapter: TodoListRecyclerViewAdapers
-   var mTodoList = ArrayList<CalendarListData>()
+    var mTodoList = ArrayList<CalendarListData>()
 
-    lateinit var travelData : CalendarListData
+
+    lateinit var travelData: CalendarListData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,15 +54,14 @@ class TodoListActivity : BaseActivity() {
 
 
     }
+
     override fun onResume() {
         super.onResume()
         getMyAppointmentListFromServer()
     }
 
 
-
     override fun setValues() {
-
 
 
         mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoList)
@@ -69,24 +69,49 @@ class TodoListActivity : BaseActivity() {
         binding.hourListRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
+    //var lists= travelData.data.title
     fun getMyAppointmentListFromServer() {
         apiList.getRequestMdataList().enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
-                    mTodoList.clear()
-                    mTodoList.addAll(br.data.calendarlists)
+                    //mTodoList.clear()
+                      mTodoList.clear()
+                    //val sdf = SimpleDateFormat("h:mm:ss")
+                    for (data in br.data.calendarlists) {
+////                        //  val time = sdf.format(data.datetime)
+                        val title = data.title
+////                        val hour = data.datetime
+                        val title1 = travelData.title
+////                        val hour1 = travelData.datetime
+                      if (title != title1) {
+                          mTodoList.add(data)
+                     }
+                   }
+
+                   // mTodoList.addAll(br.data.calendarlists)
+
                     mTodoListAdapter.notifyDataSetChanged()
+                }
+
 
                 }
-            }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
             }
+
+
         })
 
     }
 }
+
+
+
+
+
+
+
 
 

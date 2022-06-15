@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/yellow"
         android:padding="40dp"
         android:orientation="vertical"
         tools:context=".ui.main.LoginActivity">
@@ -34,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이메일 양식으로 입력"
+                android:background="@color/white"
                 android:inputType="textEmailAddress"/>
 
             <TextView
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호 입력"
+                android:background="@color/white"
                 android:inputType="textPassword"/>
             <CheckBox
                 android:id="@+id/autoLoginCb"
@@ -61,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-
+android:textStyle="bold"
                 android:text="로그인"/>
 
             <Button

@@ -32,7 +32,7 @@ class CalendarListRecylerViewAdapter(
 
             // binding.titleTxt.text = item.title
 
-            val sdf = SimpleDateFormat("M/d hh:mm:ss ")
+            val sdf = SimpleDateFormat("M/d ")
 
                 binding.dateTxt.text = "${sdf.format(item.datetime)}"
 

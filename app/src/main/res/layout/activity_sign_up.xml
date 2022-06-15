@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/yellow"
         android:padding="30dp"
         android:orientation="vertical"
         tools:context=".ui.signup.SignUpActivity">
@@ -25,12 +26,15 @@
                 android:id="@+id/emailEdt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:layout_weight="1"
                 android:hint="이메일 입력"
                 android:inputType="textEmailAddress"/>
 
             <Button
                 android:id="@+id/emailDupBtn"
+
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="중복 확인"/>
@@ -47,6 +51,7 @@
             android:id="@+id/passwordEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:hint="비밀번호 8자 이상 입력"
             android:inputType="textPassword"/>
 
@@ -60,6 +65,7 @@
             android:id="@+id/pwDupEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:hint="비밀번호 재입력"
             android:inputType="textPassword"/>
 
@@ -79,6 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:hint="닉네임 입력"
                 android:inputType="text"
                 android:imeOptions="actionDone"/>

@@ -1,6 +1,7 @@
 package com.example.travelplan_finalproject.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 data class CalendarListData (
@@ -10,6 +11,7 @@ data class CalendarListData (
     val place : String,
     val latitude : Double,
     val longitude : Double,
+    val expense:Int,
     val user : UserData,
-        ){
+        ): Serializable{
 }

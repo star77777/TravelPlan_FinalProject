@@ -30,15 +30,14 @@ class TodoListActivity : BaseActivity() {
     lateinit var binding:ActivityEditTodoListBinding
 
     lateinit var mTodoListAdapter: TodoListRecyclerViewAdapers
-    lateinit var mCalendarAdaper: CalendarListRecylerViewAdapter
+   var mTodoList = ArrayList<CalendarListData>()
 
-    var mTodoList = ArrayList<CalendarListData>()
-
+    lateinit var travelData : CalendarListData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_todo_list)
-
+        travelData = intent.getSerializableExtra("travelData") as CalendarListData
         setupEvents()
         setValues()
     }
@@ -48,19 +47,26 @@ class TodoListActivity : BaseActivity() {
     override fun setupEvents() {
         binding.addHourListBtn.setOnClickListener {
             val myIntent = Intent(mContext, TodoListActivityfagxx::class.java)
+            myIntent.putExtra("travelData", travelData)
             startActivity(myIntent)
         }
+
+
     }
     override fun onResume() {
         super.onResume()
         getMyAppointmentListFromServer()
     }
 
+
+
     override fun setValues() {
-        mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoList, false)
+
+
+
+        mTodoListAdapter = TodoListRecyclerViewAdapers(mContext, mTodoList)
         binding.hourListRecyclerView.adapter = mTodoListAdapter
         binding.hourListRecyclerView.layoutManager = LinearLayoutManager(mContext)
-
     }
 
     fun getMyAppointmentListFromServer() {
@@ -71,6 +77,7 @@ class TodoListActivity : BaseActivity() {
                     mTodoList.clear()
                     mTodoList.addAll(br.data.calendarlists)
                     mTodoListAdapter.notifyDataSetChanged()
+
                 }
             }
 

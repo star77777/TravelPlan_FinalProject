@@ -32,8 +32,11 @@
                 android:id="@+id/addHourListBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
+                android:src="@drawable/add_plus_icon" />
 
-                android:src="@drawable/add_plus_new_icon" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

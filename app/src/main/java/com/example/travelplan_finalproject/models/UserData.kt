@@ -1,6 +1,7 @@
 package com.example.travelplan_finalproject.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class UserData (
     val id : Int,
@@ -12,6 +13,6 @@ class UserData (
     val profileImg : String,
     @SerializedName("ready_minute")
     val readyMinute : String,
-) {
+) : Serializable{
 
 }

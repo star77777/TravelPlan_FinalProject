@@ -14,7 +14,7 @@ interface ApIListNaver {
         @Query("text") text : String
     ) : Call<BasicResponseNaver>
 
-    @GET("search/local")
+    @GET("local")
     fun getSearchlocal(
         @Query("query") keyword: String,
         @Query("display") display : Int

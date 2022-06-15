@@ -1,8 +1,8 @@
 package com.example.travelplan_finalproject.fragments
 
 import android.content.Intent
-
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +17,7 @@ import com.example.travelplan_finalproject.models.CalendarListData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 
 class CalendarListFragment : BaseFragment() {
 
@@ -31,7 +32,7 @@ class CalendarListFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.activity_calendar_list_fragment,
-           // R.layout.list_item_travel_list,
+            // R.layout.list_item_travel_list,
             container,
             false
         )
@@ -46,6 +47,8 @@ class CalendarListFragment : BaseFragment() {
 
 
     override fun setupEvents() {
+
+
         binding.addTodayBtn.setOnClickListener {
             val myIntent = Intent(mContext, EditCalendarListActivity::class.java)
             startActivity(myIntent)
@@ -60,18 +63,31 @@ class CalendarListFragment : BaseFragment() {
     }
 
     override fun setValues() {
+
         mCalendarAdaper = CalendarListRecylerViewAdapter(mContext, mCalendarList, false)
         binding.calendarListsRecyclerView.adapter = mCalendarAdaper
+
         binding.calendarListsRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
     }
 
     fun getCalendarListFromServer() {
+
         apiList.getRequestMdataList().enqueue(object : Callback<BasicResponse> {
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+            override fun onResponse(
+                call: Call<BasicResponse>,
+                response: Response<BasicResponse>
+            ) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
                     mCalendarList.clear()
-                    mCalendarList.addAll(br.data.calendarlists)
+                    val sdf = SimpleDateFormat("h:mm:ss")
+                    for (data in br.data.calendarlists) {
+                        val time = sdf.format(data.datetime)
+                        if (time == "6:11:11") {
+                            mCalendarList.add(data)
+                        }
+                    }
                     mCalendarAdaper.notifyDataSetChanged()
                 }
             }
@@ -81,5 +97,4 @@ class CalendarListFragment : BaseFragment() {
             }
         })
     }
-
 }

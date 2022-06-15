@@ -11,8 +11,10 @@ interface APIList {
     @FormUrlEncoded
     @PATCH("/user/password")
     fun patchPasswordChange(
+        @Field("new_password") new_password: String,
         @Field("current_password") current_password: String,
-        @Field("new_password ") new_password: String,
+
+
     ): Call<BasicResponse>
 
     @GET("/appointment")

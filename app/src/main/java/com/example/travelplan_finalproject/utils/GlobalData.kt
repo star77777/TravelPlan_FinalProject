@@ -8,6 +8,6 @@ class GlobalData {
     companion object {
 
         var loginUser : UserData? = null
-        var password: UserData? = null
+
     }
 }

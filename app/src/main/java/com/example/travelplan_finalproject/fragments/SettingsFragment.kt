@@ -35,7 +35,7 @@ import java.io.File
 class SettingsFragment : BaseFragment() {
 
     lateinit var binding: ActivitySettingsFragmentBinding
-    var isPwDupOk = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +53,6 @@ class SettingsFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-
 
 
 //        프로필 이미지 변경 이벤트
@@ -142,28 +141,53 @@ class SettingsFragment : BaseFragment() {
             val alert = CustomAlertDialog(mContext, requireActivity())
             alert.myDialog()
 
-            alert.binding.titleTxt.text="비밀번호 변경"
-            alert.binding.bodyTxt.text="현재 비밀번호"
-            alert.binding.positiveBtn.setOnClickListener {
+            alert.binding.titleTxt.text = "비밀번호 변경"
+            alert.binding.bodyTxt.visibility = View.GONE
+            alert.binding.newpasswordEdt.visibility=View.VISIBLE
+            //alert.binding.contentEdt.visibility =View.GONE
+            alert.binding.bodyTxt.text = "현재 비밀번호"
+            alert.binding.contentEdt.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            alert.binding.newpasswordEdt.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            alert.binding.contentEdt.hint = "현재 비밀번호를 입력해주세요."
+            alert.binding.newpasswordEdt.hint ="새로운 비밀번호를 입력해주세요"
+            alert.binding.newpasswordEdt.text.toString()
+           alert.binding.contentEdt.text.toString()
+                alert.binding.positiveBtn.setOnClickListener {
+                    apiList.patchPasswordChange(
+                        alert.binding.newpasswordEdt.text.toString(),
+                        alert.binding.contentEdt.text.toString(),
 
-                ContextUtil.clear(mContext)
+                    ).enqueue(object : Callback<BasicResponse> {
+                        override fun onResponse(
+                            call: Call<BasicResponse>,
+                            response: Response<BasicResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                val br = response.body()!!
+                                GlobalData.loginUser = br.data.user
+                               ContextUtil.setLoginToken(mContext, br.data.token)
+                                alert.dialog.dismiss()
+                            }
+//
+                            else {
+                                val errorBodyStr = response.errorBody()!!.string()
+                                val jsonObj = JSONObject(errorBodyStr)
+                                val message = jsonObj.getString("message")
 
-               .contentEdt.addTextChangedListener {
-                    isPwDupOk = (it.toString() == binding.pwDupEdt.text.toString())
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                        }
+                    })
                 }
 
-
-                val myIntent = Intent(mContext, LoginActivity::class.java)
-                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(myIntent)
-                alert.dialog.dismiss()
-
-            }
             alert.binding.negativeBtn.setOnClickListener {
                 alert.dialog.dismiss()
             }
         }
-
 
 //        공유하기 이벤트
         binding.share.setOnClickListener {
@@ -187,7 +211,8 @@ class SettingsFragment : BaseFragment() {
                 GlobalData.loginUser = null
 
                 val myIntent = Intent(mContext, LoginActivity::class.java)
-                myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                myIntent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(myIntent)
 
                 alert.dialog.dismiss()
@@ -198,65 +223,72 @@ class SettingsFragment : BaseFragment() {
         }
     }
 
-    override fun setValues() {
-        setUserData()
+        override fun setValues() {
+            setUserData()
 
 
-    }
+        }
 
-    fun setUserData() {
-        Glide.with(mContext)
-            .load(GlobalData.loginUser!!.profileImg)
-            .into(binding.profileImg)
-        binding.nicknameTxt.text = GlobalData.loginUser!!.nickname
+        fun setUserData() {
+            Glide.with(mContext)
+                .load(GlobalData.loginUser!!.profileImg)
+                .into(binding.profileImg)
+            binding.nicknameTxt.text = GlobalData.loginUser!!.nickname
 
 
-    }
-    val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
+        }
+
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
 //            어떤 사진을 골랏는지? 파악해보자
 //            임시 : 고른 사진을 profileImg에 바로 적용만 (서버전송 X)
 
 //            data? => 이전 화면이 넘겨준 intent
 //            data?.data => 선택한 사진이 들어있는 경로 정보 (Uri)
-                val dataUri = it.data?.data
+                    val dataUri = it.data?.data
 
 //            Uri -> 이미지뷰의 사진 (GLide)
-                Glide.with(mContext).load(dataUri).into(binding.profileImg)
+                    Glide.with(mContext).load(dataUri).into(binding.profileImg)
 
-                //            API 서버에 사진을 전송 => PUT 메쏘드 + ("/user/image")
+                    //            API 서버에 사진을 전송 => PUT 메쏘드 + ("/user/image")
 //            파일을 같이 첨부해야 => Multipart 형식의 데이터 첨부 활용 (기존 FromData와는 다르다!!)
 
 //            Uri -> File 형태로 변환 -> 그 파일의 실제 경로를 얻어낼 필요가 있다.
-                val file = File(URIPathHelper().getPath(mContext, dataUri!!))
+                    val file = File(URIPathHelper().getPath(mContext, dataUri!!))
 
 //            파일을 retrofit에 첨부할 수 있는 => RequestBody => MultipartBody 형태로 변환
-                val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
-                val body = MultipartBody.Part.createFormData("profile_image", "myFile.jpg", fileReqBody)
+                    val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+                    val body = MultipartBody.Part.createFormData(
+                        "profile_image",
+                        "myFile.jpg",
+                        fileReqBody
+                    )
 
-                apiList.putRequestUserImage(body).enqueue(object : Callback<BasicResponse>{
-                    override fun onResponse(
-                        call: Call<BasicResponse>,
-                        response: Response<BasicResponse>
-                    ) {
-                        if (response.isSuccessful) {
+                    apiList.putRequestUserImage(body).enqueue(object : Callback<BasicResponse> {
+                        override fun onResponse(
+                            call: Call<BasicResponse>,
+                            response: Response<BasicResponse>
+                        ) {
+                            if (response.isSuccessful) {
 //                        1. 선택한 이미지로 UI 프사 변경
-                            GlobalData.loginUser = response.body()!!.data.user
+                                GlobalData.loginUser = response.body()!!.data.user
 
-                            Glide.with(mContext).load(GlobalData.loginUser!!.profileImg).into(binding.profileImg)
+                                Glide.with(mContext).load(GlobalData.loginUser!!.profileImg)
+                                    .into(binding.profileImg)
 
 //                        2. 토스트로 성공 메세지
-                            Toast.makeText(mContext, "프로필 사진이 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mContext, "프로필 사진이 변경되었습니다.", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                        override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
-                    }
-                })
-            }
-        }
+                        }
+                    })
+                }
+                   }
+    }
 
-}
 

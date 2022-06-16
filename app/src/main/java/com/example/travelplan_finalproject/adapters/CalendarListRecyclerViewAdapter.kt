@@ -34,7 +34,7 @@ class CalendarListRecylerViewAdapter(
 
             val sdf = SimpleDateFormat("M/d ")
 
-                binding.dateTxt.text = "${sdf.format(item.datetime)}"
+            binding.dateTxt.text = "${sdf.format(item.datetime)}"
 
 
             binding.titleTxt.text = "제목:${item.title}"
@@ -42,15 +42,15 @@ class CalendarListRecylerViewAdapter(
             binding.placeTxt.text = "약속 장소 : ${item.place}"
 
 //            리싸이클러뷰 한칸의 레이아웃 클릭 이벤트
-    binding.TodayEdt.setOnClickListener{
-        val myIntent = Intent(mContext, TodoListActivity::class.java)
-        myIntent.putExtra("travelData", item)
-        mContext.startActivity(myIntent)
+            binding.TodayEdt.setOnClickListener {
+                val myIntent = Intent(mContext, TodoListActivity::class.java)
+                myIntent.putExtra("travelData", item)
+                mContext.startActivity(myIntent)
+            }
+
+
+        }
     }
-
-
-}
-}
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

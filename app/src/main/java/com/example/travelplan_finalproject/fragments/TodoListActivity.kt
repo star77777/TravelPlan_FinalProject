@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,20 +78,24 @@ class TodoListActivity : BaseActivity() {
                     val br = response.body()!!
                     //mTodoList.clear()
                       mTodoList.clear()
-                    //val sdf = SimpleDateFormat("h:mm:ss")
+                    val sdf = SimpleDateFormat("h:mm:ss")
                     for (data in br.data.calendarlists) {
 ////                        //  val time = sdf.format(data.datetime)
                         val title = data.title
 ////                        val hour = data.datetime
                         val title1 = travelData.title
 ////                        val hour1 = travelData.datetime
-                      if (title != title1) {
-                          mTodoList.add(data)
+                        val time = sdf.format(data.datetime)
+                      if (title == title1) {
+                          if (time != "6:11:11") {
+                              mTodoList.add(data)
+                              Log.d("data", data.toString())
+                              Log.d("list", mTodoList.size.toString())
+                          }
                      }
                    }
 
                    // mTodoList.addAll(br.data.calendarlists)
-
                     mTodoListAdapter.notifyDataSetChanged()
                 }
 
